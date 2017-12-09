@@ -9,6 +9,7 @@ from numpy.random import randint
 from numpy import linspace
 from numpy import arange
 from numpy import column_stack
+from numpy import concatenate
 from numpy import cos
 from numpy import sin
 
@@ -37,13 +38,13 @@ def spline_iterator():
   splines = []
   for _ in range(30):
     guide = f(0.5,0.5)
-    pnum = randint(15,100)
+    pnum = randint(7,50)*2
 
     a = random()*TWOPI + linspace(0, TWOPI, pnum)
     # a = linspace(0, TWOPI, pnum)
     path = column_stack((cos(a), sin(a))) * (0.1+random()*0.4)
 
-    scale = arange(pnum).astype('float')*STP
+    scale = concatenate((arange(pnum/2, 0, -1), arange(pnum/2))).astype('float')*STP
 
     s = SandSpline(
         guide,
