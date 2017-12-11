@@ -52,6 +52,7 @@ class SandSpline(object):
     rnd = column_stack((cos(a), sin(a)))
 
     self.path += rnd * reshape(self.noise, (self.pnum,1))
+    self.path[self.pnum-1] = self.path[0]
     self.interpolated_path = _rnd_interpolate(self.path, self.inum, ordered=ORDERED)
 
     self.i+=1
